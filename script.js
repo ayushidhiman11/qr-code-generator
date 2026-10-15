@@ -16,7 +16,6 @@ generateBtn.addEventListener('click',(e)=>{
 
 sizes.addEventListener('change',(e)=>{
     size = e.target.value;
-    // isEmptyInput();
     if(isGenerated){
         isEmptyInput();
     }
@@ -53,7 +52,6 @@ function isEmptyInput(){
     else{
         alert("Enter the text or URL to generate your QR code");
 }
-// qrText.value.length > 0 ? generateQRCode() : alert("Enter the text or URL to generate your QR code");
 }
 
 function generateQRCode(){
