@@ -105,7 +105,7 @@ body{
     max-height: 100%;
     margin-block: 10px;
     padding: 20px;
-    border: 0.5px solid var(--border-color);
+    border: 5px solid var(--border-color);
     border-radius: var(--border-radius);
 }
 
