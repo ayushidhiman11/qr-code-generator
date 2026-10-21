@@ -9,6 +9,7 @@ const resetBtn = document.getElementById('resetbtn');
 const qrColor = document.getElementById("qrColor");
 
 let size = sizes.value;
+let isGenerated = false;
 generateBtn.addEventListener('click',(e)=>{
     e.preventDefault();
     isEmptyInput();
@@ -42,10 +43,11 @@ downloadBtn.addEventListener('click', (e)=>{
 resetBtn.addEventListener('click' ,()=>{
     qrContainer.innerHTML = "";
     qrText.value = "";
+    isGenerated = false;
 });
   
 function isEmptyInput(){
-    if(qrText.value.length > 0){
+    if(qrText.value.trim().length > 0){
          generateQRCode();
          isGenerated = true;
     }
