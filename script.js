@@ -22,47 +22,70 @@ sizes.addEventListener('change',(e)=>{
     }
 });
 
-downloadBtn.addEventListener('click', (e)=>{
-
-    const img = qrContainer.querySelector("img");
-    const canvas = qrContainer.querySelector("canvas");
-
-    if (img) {
-        downloadBtn.href = img.src;
-    }
-    else if (canvas) {
-        downloadBtn.href = canvas.toDataURL("image/png");
-    }
-    else {
-        e.preventDefault();
-        alert("First generate a QR code!");
+qrColor.addEventListener('change', () => {
+    if (isGenerated) {
+        generateQRCode();
     }
 });
-  
 
-resetBtn.addEventListener('click' ,()=>{
+
+downloadBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    const img = qrContainer.querySelector("img");
+
+    if (!img || !img.complete || !img.naturalWidth) {
+        alert("First generate a QR code!");
+        return;
+    }
+
+    const padding = 20;
+
+    const canvas = document.createElement("canvas");
+
+    canvas.width = img.naturalWidth + padding * 2;
+    canvas.height = img.naturalHeight + padding * 2;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.drawImage(img, padding, padding);
+
+    const link = document.createElement("a");
+    link.href = canvas.toDataURL("image/png");
+    link.download = "QR_Code.png";
+    link.click();
+});
+  
+resetBtn.addEventListener('click', (e) => {
+    e.preventDefault();
     qrContainer.innerHTML = "";
     qrText.value = "";
     isGenerated = false;
 });
+
   
-function isEmptyInput(){
-    if(qrText.value.trim().length > 0){
-         generateQRCode();
-         isGenerated = true;
+function isEmptyInput() {
+    if (qrText.value.trim().length === 0) {
+        alert("Please enter text or URL");
+        return;
     }
-    else{
-        alert("Enter the text or URL to generate your QR code");
-}
+
+    generateQRCode();
+    isGenerated = true;
 }
 
-function generateQRCode(){
+
+function generateQRCode() {
     qrContainer.innerHTML = "";
+
     new QRCode(qrContainer, {
-        text:qrText.value,
-        height:size,
-        width:size,
+        text: qrText.value.trim(),
+        height: Number(size),
+        width: Number(size),
         colorLight: "#ffffff",
-        colorDark: qrColor.value,
+        colorDark: qrColor.value
     });
 }

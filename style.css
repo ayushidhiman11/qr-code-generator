@@ -76,6 +76,7 @@ body{
    color: var(--primary-color);
    font-weight: 600;
    border-radius: var(--border-radius);
+   border: 2px solid var(--border-color);
 }
 .color-picker {
     display: flex;
@@ -90,12 +91,13 @@ body{
 }
 
 #qrColor {
-    width: 40px;
-    height: 30px;
-    padding: 2px;
-    border: 2px solid white;
-    border-radius: 6px;
+    width: 160px;
+    height: 40px;
+    padding: 8px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 16px;
 }
 .qr-body{
     display: grid;
@@ -103,21 +105,28 @@ body{
     padding: 20px;
 }
 
-.qr-body img{
+.qr-body img,
+.qr-body canvas {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
     margin-block: 10px;
     padding: 20px;
-    border: 5px solid var(--border-color);
-    border-radius: var(--border-radius);
+    background-color: white;
+    border: none;
+    border-radius: 8px;
 }
 
 @media screen and (max-width:520px){
-    .box{
-        width: 80%;
+    .box {
+    width: 100%;
+    max-width: 500px;
+}
+    .qr-footer {
+        flex-wrap: wrap;
+        gap: 8px;
     }
     .qr-footer a{
-        padding: 12px;
+        padding: 10px  14px;
         font-size: 16px;
     }
 }
