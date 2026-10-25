@@ -120,7 +120,7 @@ body{
     .box {
     width: 100%;
     max-width: 500px;
-}
+    }
     .qr-footer {
         flex-wrap: wrap;
         gap: 8px;
